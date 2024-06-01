@@ -14,9 +14,11 @@ int menu(int type)
 
     do
     {
+        loadStudentData();
+        loadCourses();
         if (type == 1)
         {
-            printf("\n1. View Profile\n2. View Courses\n3. Add Course\n4. Remove Course\n5. Generate Profile & Courses list\nPlease choose a number between 1-5 only:");
+            printf("\n1. View Profile\n2. View Courses\n3. Add Course\n4. Remove Course\n5. Generate Profile & Courses list\nPlease choose a number between 1-5 only: ");
             scanf("%d", &choice);
 
             switch (choice)
@@ -33,10 +35,15 @@ int menu(int type)
                 addCourseStd(userMatric);
                 break;
             case 4:
+                system("clear || cls");
+                system("figlet Delete Course");
                 deleteCourseStd(userMatric);
                 break;
             case 5:
-                deleteCourseStd(userMatric);
+                system("clear || cls");
+                system("figlet Report");
+                generateReportStd(userMatric);
+                generateReportCourses(userMatric);
                 break;
             default:
                 break;
@@ -44,7 +51,7 @@ int menu(int type)
         }
         else
         {
-            printf("\n1. View Student\n2. View Courses\n3. Add Courses\n4. Delete Courses\n5. Generate Report\nPlease choose a number between 1-5 only:");
+            printf("\n1. View Student\n2. View Courses\n3. Add Courses\n4. Delete Courses\n5. Generate Report\nPlease choose a number between 1-5 only: ");
             scanf("%d", &choice);
 
             switch (choice)
@@ -71,14 +78,17 @@ int menu(int type)
                 deleteCourse(userMatric);
                 break;
             case 5:
-                deleteCourseStd(userMatric);
+                system("clear || cls");
+                system("figlet Report Student");
+                generateStdReportAdmin();
+                generateCourseReportAdmin();
                 break;
             default:
                 break;
             }
         }
 
-        printf("\n\nDo you want to EXIT system (0: Yes, 1: No): ");
+        printf("\nDo you want to EXIT system (0: Yes, 1: No): ");
         scanf("%d", &stop);
         system("clear || cls");
     } while (stop == 1);

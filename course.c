@@ -5,7 +5,7 @@
 char courses[20][50];
 int courseChoose = 0;
 
-void readCourses()
+void loadCourses()
 {
     FILE *file = fopen("courses.txt", "r");
     if (file == NULL)
@@ -18,10 +18,20 @@ void readCourses()
     int i = 0;
     while (fgets(line, sizeof(line), file) != NULL && i < 20)
     {
-        printf("%d. %s", i + 1, line);
         line[strcspn(line, "\n")] = '\0';
         strcpy(courses[i], line);
         i++;
+    }
+}
+
+void readCourses()
+{
+    int courseCount = 0;
+
+    for (int i = 0; i < 20 && courses[i][0] != '\0'; i++)
+    {
+        printf("%d. %s\n", i + 1, courses[i]);
+        courseCount++;
     }
 }
 
@@ -71,7 +81,7 @@ void appendCourse(const char *course)
         return;
     }
 
-    fprintf(file, "%s\n", course);
+    fprintf(file, "\n%s\n", course);
     fclose(file);
 }
 
@@ -176,7 +186,7 @@ void addCourseStd(const char *matricNumber)
 void deleteCourseStd(const char *matricNumber)
 {
     int courseNumber;
-    system("figlet Delete Course");
+
     readCourseBasedMatric(matricNumber);
     printf("Enter the number of the subject to delete: ");
     scanf("%d", &courseNumber);
@@ -224,4 +234,57 @@ void deleteCourseStd(const char *matricNumber)
 
     remove("courseStd.txt");
     rename("courseStd.tmp", "courseStd.txt");
+}
+
+void generateReportCourses(const char *matricNumber)
+{
+    FILE *file = fopen("courseStd.txt", "r");
+    if (file == NULL)
+    {
+        printf("Error opening file.\n");
+        return;
+    }
+    char line[100];
+    char currentMatric[50] = "";
+    int found = 0;
+
+    int i = 0;
+    printf("-----------------------------------------\n");
+
+    while (fgets(line, sizeof(line), file) != NULL)
+    {
+        line[strcspn(line, "\n")] = '\0';
+        if (strcmp(line, matricNumber) == 0)
+        {
+            found = 1;
+            strcpy(currentMatric, line);
+            continue;
+        }
+        if (found && line[0] != '\0')
+        {
+            printf("|%d. %-37s|\n", i + 1, line);
+            i++;
+        }
+        if (line[0] == '\0' && strcmp(currentMatric, matricNumber) == 0)
+        {
+            break;
+        }
+    }
+    printf("-----------------------------------------\n");
+}
+
+void generateCourseReportAdmin()
+{
+    int courseCount = 0;
+    printf("Courses offered:\n");
+    printf("-----------------------------------------\n");
+
+    for (int i = 0; i < 20 && courses[i][0] != '\0'; i++)
+    {
+        printf("%d. %s\n", i + 1, courses[i]);
+        courseCount++;
+    }
+
+    printf("-----------------------------------------\n");
+    printf("Total number of courses: %d\n", courseCount);
 }
