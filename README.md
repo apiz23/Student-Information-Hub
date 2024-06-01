@@ -23,17 +23,13 @@ Student Management Hub is a console-based application developed in C. It provide
 
 5. **CRUD Operations**
     - **Students**
-        - Create: Add new student records.
-        - Read: View student details.
-        - Update: Modify existing student records.
-        - Delete: Remove student records.
-    - **Courses**
         - Create: Add new course records.
-        - Read: View course details.
-        - Update: Modify existing course records.
+        - Read: View student details.
+        - Delete: Remove student records.
+    - **Admin**
+        - Create: Add new course records.
+        - Read: View course or student details.
         - Delete: Remove course records.
-    - **Additional Operations**
-        - Calculate and display fees (bayo yuran).
 
 6. **Reports**
     - Generate reports on the total number of students and courses.
@@ -58,7 +54,7 @@ Student Management Hub is a console-based application developed in C. It provide
     ```
 3. Compile the project:
     ```bash
-    gcc -o app main.c
+    gcc -o app index.c authenticate.c student.c course.c
     ```
 
 ## Contributing
