@@ -7,7 +7,7 @@ int courseChoose = 0;
 
 void loadCourses()
 {
-    FILE *file = fopen("courses.txt", "r");
+    FILE *file = fopen("./files/courses.txt", "r");
     if (file == NULL)
     {
         printf("Error opening file.\n");
@@ -37,7 +37,7 @@ void readCourses()
 
 void readCourseBasedMatric(const char *matricNumber)
 {
-    FILE *file = fopen("courseStd.txt", "r");
+    FILE *file = fopen("./files/courseStd.txt", "r");
     if (file == NULL)
     {
         printf("Error opening file.\n");
@@ -74,7 +74,7 @@ void readCourseBasedMatric(const char *matricNumber)
 
 void appendCourse(const char *course)
 {
-    FILE *file = fopen("courses.txt", "a");
+    FILE *file = fopen("./files/courses.txt", "a");
     if (!file)
     {
         printf("Error opening file\n");
@@ -98,7 +98,7 @@ void deleteCourse()
         return;
     }
 
-    FILE *file = fopen("courses.txt", "w");
+    FILE *file = fopen("./files/courses.txt", "w");
     if (!file)
     {
         printf("Error opening file\n");
@@ -106,7 +106,7 @@ void deleteCourse()
     }
     fclose(file);
 
-    file = fopen("courses.txt", "a");
+    file = fopen("./files/courses.txt", "a");
     if (!file)
     {
         printf("Error opening file\n");
@@ -123,8 +123,8 @@ void deleteCourse()
 void addCourseStd(const char *matricNumber)
 {
     system("clear || cls");
-    FILE *file = fopen("courseStd.tmp", "w");
-    FILE *originalFile = fopen("courseStd.txt", "r");
+    FILE *file = fopen("./files/courseStd.tmp", "w");
+    FILE *originalFile = fopen("./files/courseStd.txt", "r");
     if (file == NULL || originalFile == NULL)
     {
         printf("Error opening file.\n");
@@ -179,8 +179,8 @@ void addCourseStd(const char *matricNumber)
     fclose(file);
     fclose(originalFile);
 
-    remove("courseStd.txt");
-    rename("courseStd.tmp", "courseStd.txt");
+    remove("./files/courseStd.txt");
+    rename("./files/courseStd.tmp", "./files/courseStd.txt");
 }
 
 void deleteCourseStd(const char *matricNumber)
@@ -191,8 +191,8 @@ void deleteCourseStd(const char *matricNumber)
     printf("Enter the number of the subject to delete: ");
     scanf("%d", &courseNumber);
 
-    FILE *file = fopen("courseStd.tmp", "w");
-    FILE *originalFile = fopen("courseStd.txt", "r");
+    FILE *file = fopen("./files/courseStd.tmp", "w");
+    FILE *originalFile = fopen("./files/courseStd.txt", "r");
     if (file == NULL || originalFile == NULL)
     {
         printf("Error opening file.\n");
@@ -232,13 +232,13 @@ void deleteCourseStd(const char *matricNumber)
     fclose(file);
     fclose(originalFile);
 
-    remove("courseStd.txt");
-    rename("courseStd.tmp", "courseStd.txt");
+    remove("./files/courseStd.txt");
+    rename("./files/courseStd.tmp", "./files/courseStd.txt");
 }
 
 void generateReportCourses(const char *matricNumber)
 {
-    FILE *file = fopen("courseStd.txt", "r");
+    FILE *file = fopen("./files/courseStd.txt", "r");
     if (file == NULL)
     {
         printf("Error opening file.\n");

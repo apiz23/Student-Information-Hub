@@ -15,7 +15,7 @@ int studentCount = 0;
 
 void loadStudentData()
 {
-    FILE *file = fopen("student.txt", "r");
+    FILE *file = fopen("./files/student.txt", "r");
     if (!file)
     {
         printf("Error opening file\n");

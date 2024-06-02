@@ -10,7 +10,7 @@ int authenticate(const char *matric, const char *password)
         return 2;
     }
 
-    FILE *file = fopen("auth.txt", "r");
+    FILE *file = fopen("./files/auth.txt", "r");
     if (!file)
     {
         perror("Unable to open auth file");
@@ -38,7 +38,7 @@ int authenticate(const char *matric, const char *password)
 int addUser(const char *new_matric, const char *new_password)
 {
     system("clear || cls\nfiglet Registration User");
-    FILE *file = fopen("auth.txt", "a");
+    FILE *file = fopen("./files/auth.txt", "a");
 
     if (!file)
     {

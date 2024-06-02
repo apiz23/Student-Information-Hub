@@ -52,9 +52,9 @@ Student Management Hub is a console-based application developed in C. It provide
     ```bash
     cd student-management-hub
     ```
-3. Compile the project:
+3. Compile and Run the project:
     ```bash
-    gcc -o app index.c authenticate.c student.c course.c
+    ./run.bat
     ```
 
 ## Contributing
