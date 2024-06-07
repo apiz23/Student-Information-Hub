@@ -120,8 +120,49 @@ void deleteCourse()
     }
 }
 
+void checkNoMatric(const char *matric_number)
+{
+    FILE *input_file = fopen("./files/courseStd.txt", "r");
+    FILE *temp_file = fopen("./files/temp.tmp", "w");
+    char line[256];
+    int found = 0;
+
+    if (input_file == NULL || temp_file == NULL)
+    {
+        perror("Error opening file");
+        if (input_file)
+            fclose(input_file);
+        if (temp_file)
+            fclose(temp_file);
+        return;
+    }
+
+    while (fgets(line, sizeof(line), input_file))
+    {
+        line[strcspn(line, "\n")] = '\0';
+
+        if (strcmp(line, matric_number) == 0)
+        {
+            found = 1;
+        }
+
+        fprintf(temp_file, "%s\n", line);
+    }
+
+    if (!found)
+    {
+        fprintf(temp_file, "\n%s\n", matric_number);
+    }
+
+    fclose(input_file);
+    fclose(temp_file);
+
+    remove("./files/courseStd.txt");
+    rename("./files/temp.tmp", "./files/courseStd.txt");
+}
 void addCourseStd(const char *matricNumber)
 {
+    checkNoMatric(matricNumber);
     system("clear || cls");
     FILE *file = fopen("./files/courseStd.tmp", "w");
     FILE *originalFile = fopen("./files/courseStd.txt", "r");
@@ -262,7 +303,7 @@ void generateReportCourses(const char *matricNumber)
         }
         if (found && line[0] != '\0')
         {
-            printf("|%d. %-37s|\n", i + 1, line);
+            printf("|%d. %-36s|\n", i + 1, line);
             i++;
         }
         if (line[0] == '\0' && strcmp(currentMatric, matricNumber) == 0)

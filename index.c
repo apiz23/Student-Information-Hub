@@ -100,8 +100,11 @@ int menu(int type)
             } while (inputVal(choice, 1, 5));
         }
 
-        printf("\nDo you want to EXIT system (1: Yes, 0: No): ");
-        scanf("%d", &stop);
+        do
+        {
+            printf("\nDo you want to EXIT system (1: Yes, 0: No): ");
+            scanf("%d", &stop);
+        } while (stop != 1 && stop != 0);
 
         system("clear || cls");
     } while (stop == 0);
