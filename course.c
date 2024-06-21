@@ -81,7 +81,7 @@ void appendCourse(const char *course)
         return;
     }
 
-    fprintf(file, "\n%s\n", course);
+    fprintf(file, "%s\n", course);
     fclose(file);
 }
 
