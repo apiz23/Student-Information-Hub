@@ -26,12 +26,24 @@ void loadCourses()
 
 void readCourses()
 {
-    int courseCount = 0;
+    FILE *file = fopen("./files/courses.txt", "r");
+    if (!file)
+    {
+        printf("Error opening file\n");
+        return;
+    }
 
-    for (int i = 0; i < 20 && courses[i][0] != '\0'; i++)
+    int courseCount = 0;
+    while (fgets(courses[courseCount], 100, file) && courseCount < 20)
+    {
+        courses[courseCount][strcspn(courses[courseCount], "\n")] = '\0';
+        courseCount++;
+    }
+    fclose(file);
+
+    for (int i = 0; i < courseCount; i++)
     {
         printf("%d. %s\n", i + 1, courses[i]);
-        courseCount++;
     }
 }
 
@@ -88,6 +100,8 @@ void appendCourse(const char *course)
 void deleteCourse()
 {
     readCourses();
+
+    int courseChoose;
     printf("\nEnter the number corresponding to the subject to delete: ");
     scanf("%d", &courseChoose);
     getchar();
@@ -104,20 +118,18 @@ void deleteCourse()
         printf("Error opening file\n");
         return;
     }
-    fclose(file);
-
-    file = fopen("./files/courses.txt", "a");
-    if (!file)
-    {
-        printf("Error opening file\n");
-        return;
-    }
 
     for (int i = 0; i < 20; ++i)
     {
         if (i != courseChoose - 1 && courses[i][0] != '\0')
+        {
             fprintf(file, "%s\n", courses[i]);
+        }
     }
+
+    fclose(file);
+
+    printf("Course deleted successfully.\n");
 }
 
 void checkNoMatric(const char *matric_number)
