@@ -122,3 +122,46 @@ void generateStdReportAdmin()
     printf("Year 2: %d\n", yearCounts[1]);
     printf("Year 3: %d\n", yearCounts[2]);
 }
+
+void addStudent()
+{
+    char details[6][50];
+
+    printf("Enter your name: ");
+    scanf("%49s", details[0]);
+
+    printf("Enter your matric number: ");
+    scanf("%10s", details[1]);
+
+    printf("Enter your username: ");
+    scanf("%49s", details[2]);
+
+    printf("Enter your password: ");
+    scanf("%49s", details[3]);
+
+    printf("Enter your program: ");
+    scanf("%49s", details[4]);
+
+    printf("Enter your year: ");
+    scanf("%s", details[5]);
+
+    FILE *studentFile = fopen("./files/student.txt", "a");
+    if (studentFile == NULL)
+    {
+        printf("Error opening student.txt file!\n");
+        return;
+    }
+
+    fprintf(studentFile, "\n%s\n%s\n%s\n%s", details[0], details[1], details[4], details[5]);
+    fclose(studentFile);
+
+    FILE *authFile = fopen("./files/auth.txt", "a");
+    if (authFile == NULL)
+    {
+        printf("Error opening auth.txt file!\n");
+        return;
+    }
+
+    fprintf(authFile, "\n%s\n%s", details[2], details[3]);
+    fclose(authFile);
+}

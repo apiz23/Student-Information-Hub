@@ -62,7 +62,7 @@ int menu(int type)
             do
             {
 
-                printf("\n1. View Student\n2. View Courses\n3. Add Courses\n4. Delete Courses\n5. Generate Report\nPlease choose a number between 1-5 only: ");
+                printf("\n1. View Student\n2. View Courses\n3. Add Courses\n4. Delete Courses\n5. Generate Report\n6. Add Student\nPlease choose a number between 1-5 only: ");
                 scanf("%d", &choice);
 
                 switch (choice)
@@ -93,6 +93,11 @@ int menu(int type)
                     system("figlet Report Student");
                     generateStdReportAdmin();
                     generateCourseReportAdmin();
+                    break;
+                case 6:
+                    system("clear || cls");
+                    system("figlet Add Student");
+                    addStudent();
                     break;
                 default:
                     break;
